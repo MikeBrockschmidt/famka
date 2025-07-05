@@ -1,8 +1,6 @@
 import 'package:famka_app/src/data/auth_repository.dart';
 import 'package:famka_app/src/data/database_repository.dart';
 import 'package:famka_app/src/features/login/presentation/login_screen.dart';
-import 'package:famka_app/src/features/menu/presentation/menu.dart';
-import 'package:famka_app/src/features/onboarding/presentation/onboarding2.dart';
 import 'package:famka_app/src/features/register/presentation/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

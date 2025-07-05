@@ -1,6 +1,5 @@
 import 'package:famka_app/src/data/app_user.dart';
 import 'package:famka_app/src/data/auth_repository.dart';
-import 'package:famka_app/src/features/menu/presentation/widgets/menu_screen.dart';
 import 'package:famka_app/src/features/onboarding/presentation/onboarding2.dart';
 import 'package:famka_app/src/theme/color_theme.dart';
 import 'package:flutter/material.dart';
