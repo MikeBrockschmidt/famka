@@ -11,7 +11,11 @@ class RegisterScreen extends StatelessWidget {
   final AuthRepository auth;
 
   // Konstrukter
-  const RegisterScreen(this.db, this.auth, {super.key});
+  const RegisterScreen({
+    required this.db,
+    required this.auth,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

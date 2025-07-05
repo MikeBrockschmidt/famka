@@ -28,15 +28,8 @@ class MainApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: appTheme,
           home: snapshot.hasData
-              ? RegisterScreen(db, auth)
-              : LoginScreen(db, auth),
-          //     ? Menu(db, currentUser: db.currentUser)
-          // ? Onboarding2Screen(
-          //     db: db,
-          //     auth: auth,
-          //     user: db.currentUser,
-          // )
-          // : LoginScreen(db, auth),
+              ? LoginScreen(db, auth)
+              : RegisterScreen(db: db, auth: auth),
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

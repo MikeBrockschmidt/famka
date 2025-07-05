@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:famka_app/src/data/database_repository.dart';
 import 'package:famka_app/src/features/onboarding/presentation/widgets/onboarding1_screen.dart';
 import 'package:famka_app/src/common/button_linear_gradient.dart';
+import 'package:famka_app/src/features/login/presentation/login_screen.dart';
 
 class RegisterWindow extends StatefulWidget {
   final DatabaseRepository db;
@@ -115,10 +116,10 @@ class _RegisterWindowState extends State<RegisterWindow> {
       await widget.db.createUser(newUser);
       widget.db.loginAs(newUser.profilId, newUser.password, newUser);
 
-      // 🔐 Wichtig: Zuerst Registrierung bei Firebase
+      // 🔐 Registrierung bei Firebase
       await widget.auth.createUserWithEmailAndPassword(email, password);
 
-      // ✅ Danach: Anmeldung
+      // ✅ Anmeldung
       await widget.auth.signInWithEmailAndPassword(email, password);
 
       if (mounted) {
@@ -144,6 +145,10 @@ class _RegisterWindowState extends State<RegisterWindow> {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.titleSmall;
+    final linkStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
+          color: Colors.blue,
+          decoration: TextDecoration.underline,
+        );
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -250,21 +255,20 @@ class _RegisterWindowState extends State<RegisterWindow> {
                             buttonText: 'Registrieren'),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  Onboarding1Screen(widget.db, widget.auth),
-                            ),
-                          );
-                        },
-                        child: const ButtonLinearGradient(
-                            buttonText: 'Neu hier? Dann hier entlang'),
+                    const SizedBox(height: 12),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                LoginScreen(widget.db, widget.auth),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Ich bin schon registriert!',
+                        style: linkStyle,
                       ),
                     ),
                   ],

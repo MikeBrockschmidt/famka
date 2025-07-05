@@ -1,10 +1,9 @@
 import 'package:famka_app/src/data/auth_repository.dart';
 import 'package:famka_app/src/data/database_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:famka_app/src/features/login/presentation/login_screen.dart';
 
 class OnboardingProgress2 extends StatelessWidget {
-  // Atribute
+  // Attribute
   final DatabaseRepository db;
   final AuthRepository auth;
 
@@ -29,13 +28,10 @@ class OnboardingProgress2 extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(db, auth),
-            ),
-          );
+        onTap: () async {
+          await auth.signOut(); // Nutzer ausloggen
+          // Optional: hier kannst du noch navigieren, falls nötig
+          // z.B. Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => SomeScreen()));
         },
         child: Container(
           width: 80,

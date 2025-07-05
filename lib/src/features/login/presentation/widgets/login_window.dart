@@ -1,11 +1,14 @@
 import 'package:famka_app/src/data/app_user.dart';
 import 'package:famka_app/src/data/auth_repository.dart';
 import 'package:famka_app/src/features/menu/presentation/widgets/menu_screen.dart';
+import 'package:famka_app/src/features/onboarding/presentation/onboarding2.dart';
 import 'package:famka_app/src/theme/color_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:famka_app/src/data/database_repository.dart';
 import 'package:famka_app/src/features/onboarding/presentation/widgets/onboarding1_screen.dart';
 import 'package:famka_app/src/common/button_linear_gradient.dart';
+import 'package:famka_app/src/features/register/presentation/register_screen.dart';
+import 'package:flutter/gestures.dart';
 
 class LoginWindow extends StatefulWidget {
   final DatabaseRepository db;
@@ -58,9 +61,10 @@ class _LoginWindowState extends State<LoginWindow> {
         // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
-          builder: (context) => MenuScreen(
-            widget.db,
-            currentUser: currentUser,
+          builder: (context) => Onboarding2Screen(
+            db: widget.db,
+            user: currentUser,
+            auth: widget.auth,
           ),
         ),
       );
@@ -100,8 +104,8 @@ class _LoginWindowState extends State<LoginWindow> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: validateEmailOrPhone,
                       decoration: InputDecoration(
-                        labelText: "Telefonnummer oder E-Mail Adresse",
-                        hintText: "Benutzername oder E-Mail Adresse eingeben",
+                        labelText: "E-Mail Adresse",
+                        hintText: "E-Mail Adresse eingeben",
                         border: const OutlineInputBorder(),
                         hintStyle: textStyle,
                         labelStyle: textStyle,
@@ -230,6 +234,34 @@ class _LoginWindowState extends State<LoginWindow> {
                       },
                       child: const ButtonLinearGradient(
                           buttonText: 'Neu hier? Dann hier entlang'),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: Colors.black),
+                      children: [
+                        const TextSpan(text: 'Zur Registrierung '),
+                        TextSpan(
+                          text: 'hier entlang',
+                          style: const TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegisterScreen(
+                                        db: widget.db, auth: widget.auth)),
+                              );
+                            },
+                        ),
+                      ],
                     ),
                   ),
                 ],
